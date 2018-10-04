@@ -1,0 +1,23 @@
+
+<!-- table ajaxdevices search -->
+<p>
+ <a href="?view_mode=discovery" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> <#LANG_HUE_RESCAN_DEVICES#></a>
+
+</p>
+
+
+<ul class="nav nav-tabs">
+ <li [#if TAB=="" || TAB=="devices"#] class="active"[#endif#]><a href="?tab=devices"><#LANG_DEVICES#></a> </li>
+ <li [#if TAB=="log"#] class="active"[#endif#]><a href="?tab=log"><#LANG_GENERAL_EVENTS_LOG#></a> </li>
+ <li [#if TAB=="help"#] class="active"[#endif#]><a href="?tab=help"><#LANG_HELP#></a> </li>
+</ul>
+
+[#if TAB="devices" || TAB==""#]
+[#inc ajaxdevices_search_devices.html#]
+[#endif#]
+[#if TAB="log"#]
+[#inc ajaxdevices_search_log.html#]
+[#endif#]
+[#if TAB="help"#]
+[#inc help.html#]
+[#endif#]
