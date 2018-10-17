@@ -35,7 +35,6 @@
           // some action for every record if required
           $tmp = explode(' ', $res[$i]['UPDATED']);
           $res[$i]['UPDATED'] = fromDBDate($tmp[0]) . " " . $tmp[1];
-     //     $res[$i]['DEVICE_TYPE_NAME'] =  $array_type($res[$i]["DEVICE_TYPE"]).' ['.$res[$i]["DEVICE_TYPE"].']';
           $res[$i]['DEVICE_TYPE_NAME'] =  $array_type[$res[$i]["DEVICE_TYPE"]].' ['.$res[$i]["DEVICE_TYPE"].']';
 
           $property = SQLSelect("SELECT * FROM ajaxdevicesproperty WHERE AJAXDEVICES_ID=" . $res[$i]['ID'] . " AND (TITLE='batteryCharge' or TITLE='temperature') ORDER BY TITLE");

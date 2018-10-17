@@ -24,7 +24,7 @@
       3=>'FireProtect Plus'
   );
   if (!$qry) $qry="1";
-  $sortby_ajaxdevices="ID DESC";
+  $sortby_ajaxdevices="TIME DESC";
   $out['SORTBY']=$sortby_ajaxdevices;
   // SEARCH RESULTS
 
@@ -36,21 +36,20 @@
           // some action for every record if required
           $tmp = explode(' ', $res[$i]['UPDATED']);
           $res[$i]['UPDATED'] = fromDBDate($tmp[0]) . " " . $tmp[1];
-     //     $res[$i]['DEVICE_TYPE_NAME'] =  $array_type($res[$i]["DEVICE_TYPE"]).' ['.$res[$i]["DEVICE_TYPE"].']';
           $res[$i]['DEVICE_TYPE_NAME'] =  $array_type[$res[$i]["DEVICE_TYPE"]].' ['.$res[$i]["DEVICE_TYPE"].']';
           $dateTime = DateTime::createFromFormat('U.u', $res[$i]['TIME'] / 1000);
-          $res[$i]['TIME']=$dateTime->format('Y-m-d H:i:s.u');
+          if ($dateTime)
+          $res[$i]['TIME']=$dateTime->format('Y-m-d H:i:s');
           $res[$i]['STR']=sprintf(
               "%s. Event with code #%s raised at object %s at %s\n",
               $res[$i]['LOGID'],
               $res[$i]['EVENTCODE'],
               $res[$i]['OBJNAME'],
-              $dateTime->format('Y-m-d H:i:s.u')
+              $res[$i]['TIME']
           );
 
 
       }
-
       $out['RESULT'] = $res;
   }
 

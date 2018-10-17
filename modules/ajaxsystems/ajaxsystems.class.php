@@ -216,7 +216,27 @@ function admin(&$out) {
         }
 
     }
+    function getLogs($AjaxResponce,$hub_id){
+        $result=$AjaxResponce->hetHubLogs($hub_id);
+        foreach (json_decode($result)->data as $event) {
+            $log_rec = SQLSelectOne("SELECT * FROM  ajaxdeviceslog WHERE  LOGID='".$event->id."'" );
+            if ($log_rec['ID']) {
+            } else{
+                $log_rec_prop = array();
+                $log_rec_prop['LOGID'] = $event->id;
+                $log_rec_prop['LOGTYPE'] = $event->logType;
+                $log_rec_prop['OBJTYPE'] = $event->objType;
+                $log_rec_prop['OBJID'] = $event->objId;
+                $log_rec_prop['EVENTCODE'] = $event->eventCode;
+                $log_rec_prop['OBJNAME'] = $event->objName;
+                $log_rec_prop['ROOMNAME'] = $event->roomName;
+                $log_rec_prop['HUBID'] = $event->hubId;
+                $log_rec_prop['TIME']=$event->time;
+                $log_rec_prop['ID'] = SQLInsert('ajaxdeviceslog', $log_rec_prop);
 
+            }
+        }
+    }
 
 
 
@@ -232,11 +252,12 @@ function admin(&$out) {
         $AjaxResponce->getCsa();
 
         $result=$AjaxResponce->getHubData();
-       // print_r(json_decode($result)->data); die();
+
         foreach (json_decode($result)->data as $hub) {
             foreach ($hub->objects as $key=>$objects) {
                 ////36 type - room, 34 type - user
                 if ($objects->objectType==36 || $objects->objectType==34) continue;
+
 
                 $dev_rec = SQLSelectOne("SELECT * FROM ajaxdevices WHERE  DEVICE_ID='" . $objects->objectId . "' ");
                 if ($dev_rec['ID']) {
@@ -258,40 +279,12 @@ function admin(&$out) {
                 foreach ($objects as $key=>$value) {
                     if (strlen($value)>0)
                     $this->proper_set($key, $value, $dev_rec["ID"]);
+                    if ($objects->objectType==33 && $key=='hexObjectId') {
+                        $this->getLogs($AjaxResponce,$value);
+                    }
                 }
             }
-
-
-
         }
-
-
-        $result=$AjaxResponce->hetHubLogs('000140AD');
-        foreach (json_decode($result)->data as $event) {
-
-
-            $log_rec = SQLSelectOne("SELECT * FROM  ajaxdeviceslog WHERE  LOGID='".$event->id."'" );
-
-            if ($log_rec['ID']) {
-
-            } else{
-                $log_rec_prop = array();
-                $log_rec_prop['LOGID'] = $event->id;
-                $log_rec_prop['LOGTYPE'] = $event->logType;
-                $log_rec_prop['OBJTYPE'] = $event->objType;
-                $log_rec_prop['OBJID'] = $event->objId;
-                $log_rec_prop['EVENTCODE'] = $event->eventCode;
-                $log_rec_prop['OBJNAME'] = $event->objName;
-                $log_rec_prop['ROOMNAME'] = $event->roomName;
-                $log_rec_prop['HUBID'] = $event->hubId;
-                $log_rec_prop['TIME']=$event->time;
-                $log_rec_prop['ID'] = SQLInsert('ajaxdeviceslog', $log_rec_prop);
-
-            }
-        }
-
-
-        //die();
     }
 
 
