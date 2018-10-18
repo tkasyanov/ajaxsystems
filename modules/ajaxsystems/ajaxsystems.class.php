@@ -422,8 +422,8 @@ ajaxdevicesproperty -
  ajaxdeviceslog: OBJTYPE int(10) NOT NULL DEFAULT '0'
  ajaxdeviceslog: TIME int(10) NOT NULL DEFAULT '0'
  ajaxdeviceslog: HUBID int(10) NOT NULL DEFAULT '0'
- ajaxdeviceslog: OBJNAME int(10) varchar(100) NOT NULL DEFAULT ''
-  ajaxdeviceslog: ROOMNAME int(10) varchar(100) NOT NULL DEFAULT ''
+ ajaxdeviceslog: OBJNAME varchar(100) NOT NULL DEFAULT ''
+  ajaxdeviceslog: ROOMNAME varchar(100) NOT NULL DEFAULT ''
 EOD;
   parent::dbInstall($data);
  }
