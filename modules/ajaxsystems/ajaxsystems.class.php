@@ -417,11 +417,11 @@ ajaxdevicesproperty -
  ajaxdevicesproperty: LINKED_METHOD varchar(100) NOT NULL DEFAULT ''
  ajaxdevicesproperty: UPDATED datetime
  ajaxdeviceslog: ID int(10) unsigned NOT NULL auto_increment
- ajaxdeviceslog: LOGID int(10) unsigned NOT NULL 
- ajaxdeviceslog: LOGTYPE int(10) unsigned NOT NULL 
- ajaxdeviceslog: OBJTYPE int(10) unsigned NOT NULL 
- ajaxdeviceslog: TIME int(10) unsigned NOT NULL 
- ajaxdeviceslog: HUBID int(10) unsigned NOT NULL 
+ ajaxdeviceslog: LOGID int(10) NOT NULL DEFAULT '0'
+ ajaxdeviceslog: LOGTYPE int(10) NOT NULL DEFAULT '0'
+ ajaxdeviceslog: OBJTYPE int(10) NOT NULL DEFAULT '0'
+ ajaxdeviceslog: TIME int(10) NOT NULL DEFAULT '0'
+ ajaxdeviceslog: HUBID int(10) NOT NULL DEFAULT '0'
  ajaxdeviceslog: OBJNAME int(10) varchar(100) NOT NULL DEFAULT ''
   ajaxdeviceslog: ROOMNAME int(10) varchar(100) NOT NULL DEFAULT ''
 EOD;
