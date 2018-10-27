@@ -19,6 +19,11 @@
  </label>
  <div class="controls"><input type="password" name="api_password" value="[#API_PASSWORD#]" class="input"></div>
 </div>
+    <div class="form-group">
+        <label class="control-label">API update period
+        </label>
+        <div class="controls"><input type="text" name="api_update_period" value="[#if API_UPDATE_PERIOD!=""#][#API_UPDATE_PERIOD#][#else#]5[#endif#]" class="input"></div>
+    </div>
 <div class="form-actions">
 <button type="submit" name="subm" value="Submit" class="btn btn-primary"><#LANG_UPDATE#></button>
 <input type="hidden" name="view_mode" value="update_settings">

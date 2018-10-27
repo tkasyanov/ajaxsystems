@@ -21,7 +21,8 @@
       5=>'LeaksProtect',
       1=>'DoorProtect',
       11=>'SpaceControl',
-      3=>'FireProtect Plus'
+      3=>'FireProtect Plus',
+      15=>'DoorProtect Plus'
   );
   if (!$qry) $qry="1";
   $sortby_ajaxdevices="ID DESC";
@@ -50,7 +51,8 @@
                       if ($res[$i]['POWER'] <= 20)
                           $res[$i]['POWER_WARNING'] = 'danger';
                   }
-                  if ($property[$ic]['TITLE'] == 'temperature') {
+                  if ($property[$ic]['TITLE'] == 'temperature' ) {
+                      if ($property[$ic]['VALUE']!='-128')
                       $res[$i]['TEMP'] = $property[$ic]['VALUE'];
                   }
               }
